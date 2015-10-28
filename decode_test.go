@@ -6,6 +6,7 @@ import (
 	"github.com/johnny-lai/yaml.v2"
 	"math"
 	"net"
+  "os"
 	"reflect"
 	"strings"
 	"time"
@@ -70,6 +71,12 @@ var unmarshalTests = []struct {
 		"123",
 		&unmarshalIntTest,
 	},
+  
+  // Environment variables
+  {
+    "$GOPATH",
+    os.Getenv("GOPATH"),
+  },
 
 	// Floats from spec
 	{

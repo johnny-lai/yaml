@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"math"
+  "os"
 	"reflect"
 	"strconv"
 	"time"
@@ -153,7 +154,7 @@ func (p *parser) alias() *node {
 
 func (p *parser) scalar() *node {
 	n := p.node(scalarNode)
-	n.value = string(p.event.value)
+	n.value = os.Expand(string(p.event.value), os.Getenv)
 	n.tag = string(p.event.tag)
 	n.implicit = p.event.implicit
 	p.anchor(n, p.event.anchor)
